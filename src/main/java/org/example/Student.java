@@ -4,9 +4,16 @@ public class Student {
     private int studentID;
     private String studentName;
     private String program;
+    private int studentAge;
 
-        public Student () {
+    public Student () {
          }
+
+    public Student (String studentName, int studentAge ) {
+    }
+    public void setStudentAge(int studentAge) {
+        this.studentAge = studentAge;
+    }
 
     public void setStudentID(int studentID) {
             this.studentID = studentID;
@@ -26,10 +33,14 @@ public class Student {
     public String getProgram() {
             return program;
     }
+    public int getStudentAge() {
+        return studentAge;
+    }
     public void display() {
         System.out.println("Student ID:" + getStudentID());
         System.out.println("Student Name:" + getStudentName());
         System.out.println("Program:" + getProgram());
+        System.out.println("Student Age" + getStudentAge());
     }
 }
 
