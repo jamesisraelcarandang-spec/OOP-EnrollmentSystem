@@ -1,7 +1,7 @@
-package org.example;
+package org.example.model;
 
 public class Course {
-    private int courseID;
+    private String courseID;
     private String courseName;
     private String program;
 
@@ -11,7 +11,7 @@ public class Course {
     public void setProgram(String program) {
         this.program =program;
     }
-    public void setCourseID(int courseID) {
+    public void setCourseID(String courseID) {
         this.courseID = courseID;
     }
     public void setCourseName(String courseName) {
@@ -20,7 +20,7 @@ public class Course {
     public String getCourseName() {
         return courseName;
     }
-    public int getCourseID() {
+    public String getCourseID() {
         return courseID;
     }
     public String getProgram() {
