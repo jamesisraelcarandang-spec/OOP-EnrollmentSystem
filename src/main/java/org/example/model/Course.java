@@ -5,11 +5,14 @@ public class Course {
     private String courseName;
     private String program;
 
-    public Course() {
-
+    public Course(String courseID, String courseName, String program) {
+        this.courseID = courseID;
+        this.courseName = courseName;
+        this.program = program;
     }
+
     public void setProgram(String program) {
-        this.program =program;
+        this.program = program;
     }
     public void setCourseID(String courseID) {
         this.courseID = courseID;
@@ -26,10 +29,17 @@ public class Course {
     public String getProgram() {
         return program;
     }
-    public void display() {
-        System.out.println("Course Name:" + getCourseName());
-        System.out.println("Course ID" + getCourseID());
-        System.out.println("Program:" + getProgram());
+    public void display () {
+        System.out.println(this);
     }
 
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseID='" + courseID + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", program='" + program + '\'' +
+                '}';
+    }
 }
+

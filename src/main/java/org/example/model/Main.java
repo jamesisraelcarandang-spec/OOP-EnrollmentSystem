@@ -1,40 +1,50 @@
 package org.example.model;
 
+import org.example.services.CourseRegistration;
+import org.example.services.StudentRegistration;
+
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+        StudentRegistration studentRegistration = new StudentRegistration();
+        CourseRegistration courseRegistration = new CourseRegistration();
 
-//        Student student = new Student();
-//        student.setStudentID(0001);
-//        student.setStudentName("John Doe");
-//        student.setProgram("Information Technology");
-//
-//
-//        Course course = new Course();
-//        course.setCourseID(00001);
-//        course.setProgram("Information technology");
-//        course.setCourseName("Integrative Programming");
-//
-//        course.display();
-//        student.display();
+        Student student1 = new Student("123", "John Doe", "Information Technology");
+        studentRegistration.saveStudent(student1);
 
-        ArrayList<Student> students = new ArrayList<>();
+        System.out.println("Student");
+        studentRegistration.displayAllStudent();
 
-        Student student1 = new Student("James" , 99);
-        students.add(student1);
+        Student updatedStudent1 = new Student("123", "Jane Smith", "Computer Engineering");
+        studentRegistration.update(updatedStudent1);
 
-        System.out.println(students.get(0));
-        System.out.println(students.get(0).getStudentAge());
+        System.out.println("New Student");
+        studentRegistration.displayAllStudent();
 
-        students.get(0).setStudentName("Aso");
-        System.out.println(students.get(0).getStudentName());
+        studentRegistration.removeStudent(student1);
+        System.out.println("Current Student");
+        studentRegistration.displayAllStudent();
 
-        students.remove(0);
+        Course course1 = new Course("01","Information Technology", "Cite");
+        courseRegistration.save(course1);
+
+        System.out.println("Courses");
+        courseRegistration.displayAll();
+
+        Course updatedCourse1 = new Course("01", "Computer Enginnering", "Cite");
+        courseRegistration.updateCourse(updatedCourse1);
+
+        courseRegistration.removeCourse(course1);
+        System.out.println("Current Courses");
+        courseRegistration.displayAll();
+
+
+
+
+
 
 
 

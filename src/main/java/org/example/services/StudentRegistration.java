@@ -1,6 +1,5 @@
 package org.example.services;
 import org.example.model.Student;
-
 import java.util.*;
 import java.util.ArrayList;
 public class StudentRegistration {
@@ -15,7 +14,7 @@ public class StudentRegistration {
     public void update(Student student) {
         for (int i = 0; i <studentList.size(); i++) {
             if(studentList.get(i).getStudentID().equals(student.getStudentID())) {
-                studentList.set(i,new Student());
+                studentList.set(i, student);
                 break;
             }
         }
