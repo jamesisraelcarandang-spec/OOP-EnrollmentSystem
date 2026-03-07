@@ -1,25 +1,22 @@
-package org.example.model;
+package org.example;
 
+import org.example.model.Course;
+import org.example.model.Instructor;
+import org.example.model.Student;
 import org.example.services.CourseRegistration;
 import org.example.services.StudentRegistration;
-
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         StudentRegistration studentRegistration = new StudentRegistration();
         CourseRegistration courseRegistration = new CourseRegistration();
 
-        Student student1 = new Student("123", "John Doe", "Information Technology");
+        Student student1 = new Student("Information Technology");
+        Instructor instructor1 = new Instructor();
         studentRegistration.saveStudent(student1);
 
         System.out.println("Student");
         studentRegistration.displayAllStudent();
-
-        Student updatedStudent1 = new Student("123", "Jane Smith", "Computer Engineering");
-        studentRegistration.update(updatedStudent1);
 
         System.out.println("New Student");
         studentRegistration.displayAllStudent();
