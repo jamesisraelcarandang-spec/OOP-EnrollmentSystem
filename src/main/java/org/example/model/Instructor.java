@@ -19,4 +19,9 @@ public class Instructor extends Person {
     public void setDepartment(String department) {
         this.department = department;
     }
+
+    @Override
+    public void mainTask() {
+        System.out.println("Teaching and Managing Courses");
+    }
 }

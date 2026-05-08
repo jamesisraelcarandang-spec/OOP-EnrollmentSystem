@@ -4,16 +4,13 @@ public abstract class Person {
     private String personID;
     private String name;
 
-
     public Person() {
         this("023","Unknown");
     }
 
-
     public Person(String personID, String name) {
         this.personID = personID;
         this.name = name;
-
     }
 
     public String getName() {
@@ -30,7 +27,7 @@ public abstract class Person {
 
     public void setPersonID(String personID) {
         this.personID = personID;
-
     }
+    public abstract void  mainTask();
 
 }

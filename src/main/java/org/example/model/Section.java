@@ -10,6 +10,16 @@ public class Section {
     private Instructor instructor;
     private List <Student> enrolledStudents;
 
+    public Section() {
+        this.enrolledStudents = new ArrayList<>();
+    }
+    public Section(String sectionID, String sectionName, int maxCapacity) {
+        this.sectionID = sectionID;
+        this.sectionName = sectionName;
+        this.maxCapacity = maxCapacity;
+        this.enrolledStudents = new ArrayList<>();
+
+    }
     public String getSectionID() {
         return sectionID;
     }
@@ -50,27 +60,6 @@ public class Section {
         this.enrolledStudents = enrolledStudents;
     }
 
-    public Section (String sectionID, String sectionName, int maxCapacity) {
-        this.sectionID = sectionID;
-        this.sectionName = sectionName;
-        this.maxCapacity = maxCapacity;
-        this.enrolledStudents = new ArrayList<>();
-
-    }
-    public boolean isFull() {
-        return enrolledStudents.size() >= maxCapacity;
-    }
-    public boolean enrollStudent (Student student) {
-        if (isFull()) return false;
-        enrolledStudents.add(student);
-        return true;
-    }
-
-    public Section() {
-        super();
-    }
-
-    @Override
     public String toString() {
         return "Section{id='" + sectionID + "', name='" + sectionName +
                 "', capacity=" + enrolledStudents.size() + "/" + maxCapacity + "}";

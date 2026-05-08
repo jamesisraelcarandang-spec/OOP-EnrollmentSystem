@@ -3,14 +3,14 @@ package org.example.model;
 import java.util.Scanner;
 
 public class Student extends Person {
-    static Scanner scan = new Scanner(System.in);
     private String program;
 
     public Student() {
 
     }
 
-    public Student(String program) {
+    public Student(String program, String personID, String name) {
+        super(personID, name);
         this.program = program;
     }
 
@@ -21,7 +21,7 @@ public class Student extends Person {
     public void setProgram(String program) {
         this.program = program;
     }
-    public void mainTask() {
+    @Override public void mainTask() {
         System.out.println("I sleep");
     }
 
@@ -32,4 +32,5 @@ public class Student extends Person {
                 '}';
     }
 }
+
 
