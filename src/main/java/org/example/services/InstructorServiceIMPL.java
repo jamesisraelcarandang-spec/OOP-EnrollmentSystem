@@ -35,4 +35,37 @@ public class InstructorServiceIMPL implements InstructorService{
         }
         System.out.println("Error: Instructor with ID of " + instructorID + "not found");
     }
+
+    @Override
+    public void updateInstructor(Instructor instructor) {
+    for (int i = 0; i < instructorList.size(); i++) {
+        if (instructorList.get(i).getPersonID().equals(instructor.getPersonID())) {
+            instructorList.set(i,instructor);
+            System.out.println("Instructor Updated Successfully.");
+          }
+       }
+    }
+
+    @Override
+    public void removeInstructor(String instructorID) {
+    for (Instructor i : instructorList) {
+        if (i.getPersonID().equals(instructorID)) {
+            instructorList.remove(i);
+            System.out.println("Instructor Removed");
+            return;
+        }
+    }
+        System.out.println("Instructor not found");
+    }
+
+    @Override
+    public void getAllInstructors() {
+        if (instructorList.isEmpty()) {
+            System.out.println("No instructors found.");
+        }else{
+            for (Instructor i : instructorList) {
+                System.out.println(i);
+            }
+        }
+    }
 }
