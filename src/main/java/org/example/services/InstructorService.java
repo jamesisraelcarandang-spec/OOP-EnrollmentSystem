@@ -7,4 +7,7 @@ public interface InstructorService {
     void addInstructor(Instructor instructor);
     void assignInstructorToSection(Instructor instructor, Section section);
     void getInstructorDetails(String instructorID);
+    void updateInstructor(Instructor instructor);
+    void removeInstructor(String instructorID);
+    void getAllInstructors();
 }
