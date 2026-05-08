@@ -22,7 +22,7 @@ public class Main {
 
         // Interactive Setup
         System.out.println("=== University Enrollment System ===");
-        System.out.println("--- Initial Setup ---");
+
 
         System.out.print("Enter Department ID: "); String deptId = scan.nextLine();
         System.out.print("Enter Department Name: "); String deptName = scan.nextLine();

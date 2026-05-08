@@ -25,3 +25,9 @@
 ![Screenshot 2026-03-14 at 12.03.33 PM.png](src/main/resources/Images/Screenshot%202026-03-14%20at%2012.03.33%E2%80%AFPM.png)
 ![Screenshot 2026-03-14 at 12.05.25 PM.png](src/main/resources/Images/Screenshot%202026-03-14%20at%2012.05.25%E2%80%AFPM.png)
 ![Screenshot 2026-03-14 at 12.05.32 PM.png](src/main/resources/Images/Screenshot%202026-03-14%20at%2012.05.32%E2%80%AFPM.png)
+
+
+# Final Project
+
+---
+**Author**: Carandang James Israel
