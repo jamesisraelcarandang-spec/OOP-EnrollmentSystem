@@ -33,18 +33,4 @@ public abstract class Person {
 
     }
 
-    public void display() {
-        System.out.println(getName());
-
-    }
-    public abstract void mainTask();
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "personID=" + personID +
-                ", name='" + name +
-
-                '}';
-    }
 }
