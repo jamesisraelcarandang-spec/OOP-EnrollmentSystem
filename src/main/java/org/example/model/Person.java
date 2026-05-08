@@ -1,17 +1,14 @@
 package org.example.model;
 
 public abstract class Person {
-    private int personID;
+    private String personID;
     private String name;
 
 
     public Person() {
-        this(0);
+        this(0, "Unknown");
     }
 
-    public Person (int personID) {
-        this(personID, "Unknown");
-    }
     public Person (int personID, String name) {
         this(personID,name, 0);
     }

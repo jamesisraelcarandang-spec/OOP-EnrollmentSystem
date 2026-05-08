@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.model.Department;
 import org.example.model.Instructor;
 import org.example.model.Student;
 import org.example.services.TuitionFeePayment;
@@ -45,6 +46,9 @@ public class Main {
 
         Instructor instructor = new Instructor();
         instructor.mainTask();
+
+        Department department = new Department();
+
 
 
 
