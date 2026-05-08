@@ -6,13 +6,11 @@ public abstract class Person {
 
 
     public Person() {
-        this(0, "Unknown");
+        this("023","Unknown");
     }
 
-    public Person (int personID, String name) {
-        this(personID,name, 0);
-    }
-    public Person(int personID,String name, int age) {
+
+    public Person(String personID, String name) {
         this.personID = personID;
         this.name = name;
 
@@ -26,11 +24,11 @@ public abstract class Person {
         this.name = name;
     }
 
-    public int getPersonID() {
+    public String getPersonID() {
         return personID;
     }
 
-    public void setPersonID(int personID) {
+    public void setPersonID(String personID) {
         this.personID = personID;
 
     }
