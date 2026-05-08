@@ -16,5 +16,6 @@ public class DepartmentRegistrationService implements DepartmentReg{
 
     }
 
-    public void saveDepartment(String)
-}
+    public void saveDepartment(String) {
+
+    }
