@@ -13,7 +13,7 @@ public class StudentRegistrationIMPL implements StudentRegistration {
     }
     public void update(Student student) {
         for (int i = 0; i <studentList.size(); i++) {
-            if(studentList.get(i).getPersonID()==(student.getPersonID())) {
+            if(studentList.get(i).getPersonID().equals(student.getPersonID())) {
                 studentList.set(i, student);
                 break;
             }
@@ -21,7 +21,7 @@ public class StudentRegistrationIMPL implements StudentRegistration {
     }
     public String removeStudent(Student student) {
         for (int i = 0; i < studentList.size(); i++) {
-            if(studentList.get(i).getPersonID()==(student.getPersonID())) {
+            if(studentList.get(i).getPersonID().equals(student.getPersonID())) {
                 studentList.remove(i);
 
                 return "Successfully Deleted";
