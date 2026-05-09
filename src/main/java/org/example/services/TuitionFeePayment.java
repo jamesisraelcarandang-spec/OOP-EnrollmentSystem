@@ -8,8 +8,9 @@ public class TuitionFeePayment implements TuitionFeePaymentService{
     public double calculateTuitionFee (int units, double discountRate) {
         totalTuition = units * PRICE_PER_UNIT;
         if (discountRate != 0) {
-            totalTuition = totalTuition - (totalTuition * PRICE_PER_UNIT);
+            totalTuition = totalTuition - (totalTuition * discountRate);
         }
+        balance = totalTuition;
         return totalTuition;
     }
     public void makePayment(double amount) {

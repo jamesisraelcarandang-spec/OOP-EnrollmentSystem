@@ -12,14 +12,14 @@ public class InstructorServiceIMPL implements InstructorService{
     public void addInstructor(Instructor instructor) {
 
         instructorList.add(instructor);
-        System.out.println("Instructor" + instructor.getName()+ "added to the system.");
+        System.out.println("Instructor" + instructor.getName() + " added to the system.");
     }
 
     @Override
     public void assignInstructorToSection(Instructor instructor, Section section) {
 
         section.setInstructor(instructor);
-        System.out.println("Instructor" + instructor.getName() + "is now teaching at Section : " + section.getSectionName());
+        System.out.println("Instructor" + instructor.getName() + " is now teaching at Section : " + section.getSectionName());
     }
 
     @Override
@@ -33,7 +33,7 @@ public class InstructorServiceIMPL implements InstructorService{
                 return;
             }
         }
-        System.out.println("Error: Instructor with ID of " + instructorID + "not found");
+        System.out.println("Error: Instructor with ID of " + instructorID + " not found");
     }
 
     @Override
