@@ -1,9 +1,9 @@
 package org.example.services;
 import org.example.model.Student;
-
+import java.util.List;
 import java.util.ArrayList;
 public class StudentRegistrationIMPL implements StudentRegistration {
-    private ArrayList<Student> studentList = new ArrayList<>();
+    private List<Student> studentList = new ArrayList<>();
 
     public void saveStudent(Student student) {
         studentList.add(student);

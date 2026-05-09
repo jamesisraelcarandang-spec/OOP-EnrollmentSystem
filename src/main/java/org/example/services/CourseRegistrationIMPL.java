@@ -1,10 +1,10 @@
 package org.example.services;
 import org.example.model.Course;
-
+import java.util.List;
 import java.util.ArrayList;
 
 public class CourseRegistrationIMPL implements CourseRegistration{
-    private ArrayList<Course> courseList = new ArrayList<>();
+    private List<Course> courseList = new ArrayList<>();
 
     public void save(Course course) {
         courseList.add(course);

@@ -8,19 +8,19 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        // Initialize Services
         StudentRegistrationIMPL studService = new StudentRegistrationIMPL();
         CourseRegistrationIMPL courseService = new CourseRegistrationIMPL();
         InstructorServiceIMPL instService = new InstructorServiceIMPL();
         EnrollmentServiceIMPL enrollService = new EnrollmentServiceIMPL();
         TuitionFeePayment tuitionService = new TuitionFeePayment();
+        DepartmentServiceIMPL deptService = new DepartmentServiceIMPL();
 
-        // Master Controller
+
         CampusRegistrar registrar = new CampusRegistrar(
-                studService, courseService, instService, enrollService, tuitionService
+                studService, courseService, instService, enrollService, tuitionService, deptService
         );
 
-        // Interactive Setup
+
         System.out.println("=== University Enrollment System ===");
 
 
@@ -29,12 +29,13 @@ public class Main {
         Department dept = new Department();
         dept.setDepartmentId(deptId);
         dept.setDepartmentName(deptName);
+        registrar.addDepartment(dept);
 
         System.out.print("Enter Section ID: "); String secId = scan.nextLine();
         System.out.print("Enter Section Name: "); String secName = scan.nextLine();
         System.out.print("Enter Max Capacity: "); int cap = scan.nextInt(); scan.nextLine();
         Section section = new Section(secId, secName, cap);
-        dept.getSections().add(section);
+        registrar.addSectionToDepartment(deptId, section);
 
         System.out.print("Enter Instructor ID: "); String instId = scan.nextLine();
         System.out.print("Enter Instructor Name: "); String instName = scan.nextLine();
@@ -50,9 +51,10 @@ public class Main {
             System.out.println("1. Student Management");
             System.out.println("2. Course Management");
             System.out.println("3. Instructor Management");
-            System.out.println("4. Enroll Student in Section");
+            System.out.println("4. Section Management");
             System.out.println("5. View Institutional Hierarchy");
             System.out.println("6. Tuition and Payment");
+            System.out.println("7. Enroll Student in Section");
             System.out.println("0. Exit");
             System.out.print("Enter choice: ");
 
@@ -148,13 +150,30 @@ public class Main {
                     break;
 
                 case 4:
-                    System.out.print("Student ID: "); String eid = scan.nextLine();
-                    System.out.print("Student Name: "); String ename = scan.nextLine();
-                    registrar.enroll(new Student("BSIT", eid, ename), section);
+                    System.out.println("\n--- Section Management ---");
+                    System.out.println("1. Add Section to Department");
+                    System.out.println("2. View All Departments");
+                    System.out.print("Choice: ");
+                    int secOpt = scan.nextInt(); scan.nextLine();
+
+                    if (secOpt == 1) {
+                        System.out.print("Department ID: "); String sdId = scan.nextLine();
+                        System.out.print("Section ID: "); String newSecId = scan.nextLine();
+                        System.out.print("Section Name: "); String newSecName = scan.nextLine();
+                        System.out.print("Max Capacity: "); int newCap = scan.nextInt(); scan.nextLine();
+                        Section newSection = new Section(newSecId, newSecName, newCap);
+                        registrar.addSectionToDepartment(sdId, newSection);
+                    } else if (secOpt == 2) {
+                        registrar.displayAllDepartments();
+                    }
                     break;
 
                 case 5:
-                    registrar.showHierarchy(dept);
+                    System.out.print("Department ID: "); String hierDeptId = scan.nextLine();  // CHANGED: user picks which dept
+                    Department hierDept = registrar.findDepartment(hierDeptId);
+                    if (hierDept != null) {
+                        registrar.showHierarchy(hierDept);
+                    }
                     break;
 
                 case 6:
@@ -178,6 +197,28 @@ public class Main {
                         System.out.println("Remaining Balance: " + registrar.getBalance());
                     } else if (tOpt == 3) {
                         System.out.println("Remaining Balance: " + registrar.getBalance());
+                    }
+                    break;
+                case 7:
+                    System.out.print("Student ID: "); String eid = scan.nextLine();
+                    System.out.print("Student Name: "); String ename = scan.nextLine();
+                    System.out.print("Program: "); String eprog = scan.nextLine();
+                    System.out.print("Department ID: "); String enrollDeptId = scan.nextLine();
+                    System.out.print("Section ID: "); String enrollSecId = scan.nextLine();
+                    Department enrollDept = registrar.findDepartment(enrollDeptId);
+                    if (enrollDept != null) {
+                        Section targetSection = null;
+                        for (Section s : enrollDept.getSections()) {
+                            if (s.getSectionID().equals(enrollSecId)) {
+                                targetSection = s;
+                                break;
+                            }
+                        }
+                        if (targetSection != null) {
+                            registrar.enroll(new Student(eprog, eid, ename), targetSection);
+                        } else {
+                            System.out.println("Error: Section ID " + enrollSecId + " not found.");
+                        }
                     }
                     break;
 

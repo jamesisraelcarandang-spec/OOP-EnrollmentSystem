@@ -26,7 +26,6 @@ public class Instructor extends Person {
     }
     @Override
     public String toString() {
-        return "Instructor: " + getName() + " (ID: " + getPersonID() + ")";
+    return "Instructor: " + getName() + " (ID: " + getPersonID() + ")";
     }
-
 }
