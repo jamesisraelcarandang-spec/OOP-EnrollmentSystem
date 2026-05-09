@@ -8,19 +8,19 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        // Initialize Services
         StudentRegistrationIMPL studService = new StudentRegistrationIMPL();
         CourseRegistrationIMPL courseService = new CourseRegistrationIMPL();
         InstructorServiceIMPL instService = new InstructorServiceIMPL();
         EnrollmentServiceIMPL enrollService = new EnrollmentServiceIMPL();
         TuitionFeePayment tuitionService = new TuitionFeePayment();
+        DepartmentServiceIMPL deptService = new DepartmentServiceIMPL();
 
-        // Master Controller
+
         CampusRegistrar registrar = new CampusRegistrar(
-                studService, courseService, instService, enrollService, tuitionService
+                studService, courseService, instService, enrollService, tuitionService, deptService
         );
 
-        // Interactive Setup
+
         System.out.println("=== University Enrollment System ===");
 
 
@@ -29,12 +29,13 @@ public class Main {
         Department dept = new Department();
         dept.setDepartmentId(deptId);
         dept.setDepartmentName(deptName);
+        registrar.addDepartment(dept);
 
         System.out.print("Enter Section ID: "); String secId = scan.nextLine();
         System.out.print("Enter Section Name: "); String secName = scan.nextLine();
         System.out.print("Enter Max Capacity: "); int cap = scan.nextInt(); scan.nextLine();
         Section section = new Section(secId, secName, cap);
-        dept.getSections().add(section);
+        registrar.addSectionToDepartment(deptId, section);
 
         System.out.print("Enter Instructor ID: "); String instId = scan.nextLine();
         System.out.print("Enter Instructor Name: "); String instName = scan.nextLine();
@@ -50,14 +51,23 @@ public class Main {
             System.out.println("1. Student Management");
             System.out.println("2. Course Management");
             System.out.println("3. Instructor Management");
-            System.out.println("4. Enroll Student in Section");
+            System.out.println("4. Section Management");
             System.out.println("5. View Institutional Hierarchy");
             System.out.println("6. Tuition and Payment");
+            System.out.println("7. Enroll Student in Section");
             System.out.println("0. Exit");
             System.out.print("Enter choice: ");
 
-            int choice = scan.nextInt();
-            scan.nextLine();
+            int choice;
+            try {
+                choice = scan.nextInt();
+                scan.nextLine();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scan.nextLine();
+                continue;
+            }
+
             if (choice == 0) break;
 
             switch (choice) {
@@ -69,7 +79,14 @@ public class Main {
                     System.out.println("3. Update Student");
                     System.out.println("4. Remove Student");
                     System.out.print("Choice: ");
-                    int sOpt = scan.nextInt(); scan.nextLine();
+                    int sOpt;
+                    try {
+                        sOpt = scan.nextInt(); scan.nextLine();
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("Invalid input. Please enter a number.");
+                        scan.nextLine();
+                        break;
+                    }
 
                     if (sOpt == 1) {
                         System.out.print("Student ID: "); String sid = scan.nextLine();
@@ -77,14 +94,17 @@ public class Main {
                         System.out.print("Program: "); String sprog = scan.nextLine();
                         registrar.saveStudent(new Student(sprog, sid, sname));
                         System.out.println("Student registered.");
+
                     } else if (sOpt == 2) {
                         registrar.displayAllStudent();
+
                     } else if (sOpt == 3) {
                         System.out.print("Student ID to update: "); String uid = scan.nextLine();
                         System.out.print("New Name: "); String uname = scan.nextLine();
                         System.out.print("New Program: "); String uprog = scan.nextLine();
                         registrar.update(new Student(uprog, uid, uname));
                         System.out.println("Student updated.");
+
                     } else if (sOpt == 4) {
                         System.out.print("Student ID to remove: "); String rid = scan.nextLine();
                         String result = registrar.removeStudent(new Student("", rid, ""));
@@ -99,7 +119,15 @@ public class Main {
                     System.out.println("3. Update Course");
                     System.out.println("4. Remove Course");
                     System.out.print("Choice: ");
-                    int cOpt = scan.nextInt(); scan.nextLine();
+
+                    int cOpt;
+                    try {
+                        cOpt = scan.nextInt(); scan.nextLine();
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("Invalid input. Please enter a number.");
+                        scan.nextLine();
+                        break;
+                    }
 
                     if (cOpt == 1) {
                         System.out.print("Course ID: "); String cid = scan.nextLine();
@@ -107,14 +135,17 @@ public class Main {
                         System.out.print("Program: "); String cp = scan.nextLine();
                         registrar.save(new Course(cid, cn, cp));
                         System.out.println("Course added.");
+
                     } else if (cOpt == 2) {
                         registrar.displayAll();
+
                     } else if (cOpt == 3) {
                         System.out.print("Course ID to update: "); String ucid = scan.nextLine();
                         System.out.print("New Course Name: "); String ucn = scan.nextLine();
                         System.out.print("Program: "); String ucp = scan.nextLine();
                         registrar.updateCourse(new Course(ucid, ucn, ucp));
                         System.out.println("Course updated.");
+
                     } else if (cOpt == 4) {
                         System.out.print("Course ID to remove: "); String rcid = scan.nextLine();
                         String result = registrar.removeCourse(new Course(rcid, "", ""));
@@ -129,7 +160,15 @@ public class Main {
                     System.out.println("3. View Instructor Details");
                     System.out.println("4. Remove Instructor");
                     System.out.print("Choice: ");
-                    int iOpt = scan.nextInt(); scan.nextLine();
+                    int iOpt;
+                    try {
+                        iOpt = scan.nextInt(); scan.nextLine();
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("Invalid input. Please enter a number.");
+                        scan.nextLine();
+                        break;
+                    }
+
 
                     if (iOpt == 1) {
                         System.out.print("Instructor ID: "); String iid = scan.nextLine();
@@ -148,13 +187,38 @@ public class Main {
                     break;
 
                 case 4:
-                    System.out.print("Student ID: "); String eid = scan.nextLine();
-                    System.out.print("Student Name: "); String ename = scan.nextLine();
-                    registrar.enroll(new Student("BSIT", eid, ename), section);
+                    System.out.println("\n--- Section Management ---");
+                    System.out.println("1. Add Section to Department");
+                    System.out.println("2. View All Departments");
+                    System.out.print("Choice: ");
+                    int secOpt;
+                    try {
+                        secOpt = scan.nextInt(); scan.nextLine();
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("Invalid input. Please enter a number.");
+                        scan.nextLine();
+                        break;
+                    }
+
+
+                    if (secOpt == 1) {
+                        System.out.print("Department ID: "); String sdId = scan.nextLine();
+                        System.out.print("Section ID: "); String newSecId = scan.nextLine();
+                        System.out.print("Section Name: "); String newSecName = scan.nextLine();
+                        System.out.print("Max Capacity: "); int newCap = scan.nextInt(); scan.nextLine();
+                        Section newSection = new Section(newSecId, newSecName, newCap);
+                        registrar.addSectionToDepartment(sdId, newSection);
+                    } else if (secOpt == 2) {
+                        registrar.displayAllDepartments();
+                    }
                     break;
 
                 case 5:
-                    registrar.showHierarchy(dept);
+                    System.out.print("Department ID: "); String hierDeptId = scan.nextLine();  // CHANGED: user picks which dept
+                    Department hierDept = registrar.findDepartment(hierDeptId);
+                    if (hierDept != null) {
+                        registrar.showHierarchy(hierDept);
+                    }
                     break;
 
                 case 6:
@@ -163,21 +227,61 @@ public class Main {
                     System.out.println("2. Make Payment");
                     System.out.println("3. View Remaining Balance");
                     System.out.print("Choice: ");
-                    int tOpt = scan.nextInt(); scan.nextLine();
+                    int tOpt;
+                    try {
+                        tOpt = scan.nextInt(); scan.nextLine();
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("Invalid input. Please enter a number.");
+                        scan.nextLine();
+                        break;
+                    }
+
 
                     if (tOpt == 1) {
-                        System.out.print("Number of units: "); int units = scan.nextInt();
-                        System.out.print("Discount rate (0 if none): "); double disc = scan.nextDouble();
-                        scan.nextLine();
-                        double fee = registrar.calculateTuition(units, disc);
-                        System.out.println("Total Tuition Fee: " + fee);
+                        try {
+                            System.out.print("Number of units: "); int units = scan.nextInt();
+                            System.out.print("Discount rate (0 if none): "); double disc = scan.nextDouble();
+                            scan.nextLine();
+                            double fee = registrar.calculateTuition(units, disc);
+                            System.out.println("Total Tuition Fee: " + fee);
+                        } catch (java.util.InputMismatchException e) {
+                            System.out.println("Invalid input. Please enter a valid number.");
+                            scan.nextLine();
+                        }
                     } else if (tOpt == 2) {
-                        System.out.print("Amount to pay: "); double pay = scan.nextDouble();
-                        scan.nextLine();
-                        registrar.payTuition(pay);
-                        System.out.println("Remaining Balance: " + registrar.getBalance());
+                        try {
+                            System.out.print("Amount to pay: "); double pay = scan.nextDouble();
+                            scan.nextLine();
+                            registrar.payTuition(pay);
+                            System.out.println("Remaining Balance: " + registrar.getBalance());
+                        } catch (java.util.InputMismatchException e) {
+                            System.out.println("Invalid input. Please enter a valid number.");
+                            scan.nextLine();
+                        }
                     } else if (tOpt == 3) {
                         System.out.println("Remaining Balance: " + registrar.getBalance());
+                    }
+                        break;
+                case 7:
+                    System.out.print("Student ID: "); String eid = scan.nextLine();
+                    System.out.print("Student Name: "); String ename = scan.nextLine();
+                    System.out.print("Program: "); String eprog = scan.nextLine();
+                    System.out.print("Department ID: "); String enrollDeptId = scan.nextLine();
+                    System.out.print("Section ID: "); String enrollSecId = scan.nextLine();
+                    Department enrollDept = registrar.findDepartment(enrollDeptId);
+                    if (enrollDept != null) {
+                        Section targetSection = null;
+                        for (Section s : enrollDept.getSections()) {
+                            if (s.getSectionID().equals(enrollSecId)) {
+                                targetSection = s;
+                                break;
+                            }
+                        }
+                        if (targetSection != null) {
+                            registrar.enroll(new Student(eprog, eid, ename), targetSection);
+                        } else {
+                            System.out.println("Error: Section ID " + enrollSecId + " not found.");
+                        }
                     }
                     break;
 

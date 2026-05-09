@@ -1,7 +1,5 @@
 package org.example.model;
 
-import java.util.Scanner;
-
 public class Student extends Person {
     private String program;
 
@@ -27,10 +25,9 @@ public class Student extends Person {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "program='" + program + '\'' +
-                '}';
+        return "Student: " + getName() + " (ID: " + getPersonID() + ", Program: " + program + ")";
     }
+
 }
 
 

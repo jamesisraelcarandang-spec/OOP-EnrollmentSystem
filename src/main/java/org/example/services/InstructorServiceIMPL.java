@@ -10,16 +10,22 @@ public class InstructorServiceIMPL implements InstructorService{
 
     @Override
     public void addInstructor(Instructor instructor) {
-
+        for (Instructor i : instructorList) {
+            if (i.getPersonID().equals(instructor.getPersonID())) {
+                System.out.println("Error: Instructor with ID " + instructor.getPersonID() + " already exists.");
+                return;
+            }
+        }
         instructorList.add(instructor);
-        System.out.println("Instructor" + instructor.getName()+ "added to the system.");
+        System.out.println("Instructor " + instructor.getName() + " added to the system.");
     }
+
 
     @Override
     public void assignInstructorToSection(Instructor instructor, Section section) {
 
         section.setInstructor(instructor);
-        System.out.println("Instructor" + instructor.getName() + "is now teaching at Section : " + section.getSectionName());
+        System.out.println("Instructor " + instructor.getName() + " is now teaching at Section : " + section.getSectionName());
     }
 
     @Override
@@ -28,12 +34,12 @@ public class InstructorServiceIMPL implements InstructorService{
         for(Instructor i : instructorList) {
             if (i.getPersonID().equals(instructorID)) {
                 System.out.println("Instructor Details");
-                System.out.println("Name" + i.getName());
-                System.out.println("Department" + i.getDepartment());
+                System.out.println("Name: " + i.getName());
+                System.out.println("Department: " + i.getDepartment());
                 return;
             }
         }
-        System.out.println("Error: Instructor with ID of " + instructorID + "not found");
+        System.out.println("Error: Instructor with ID of " + instructorID + " not found");
     }
 
     @Override

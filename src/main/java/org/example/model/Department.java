@@ -18,7 +18,6 @@ public class Department {
         this.departmentName = departmentName;
         this.instructorList = instructorList;
         this.sections = new ArrayList<>();
-        this.instructorList = new ArrayList<>();
     }
 
     public String getDepartmentId() {

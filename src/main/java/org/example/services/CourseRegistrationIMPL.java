@@ -1,18 +1,32 @@
 package org.example.services;
 import org.example.model.Course;
-
+import java.util.List;
 import java.util.ArrayList;
 
 public class CourseRegistrationIMPL implements CourseRegistration{
-    private ArrayList<Course> courseList = new ArrayList<>();
+    private List<Course> courseList = new ArrayList<>();
 
     public void save(Course course) {
+        for (Course c : courseList) {
+            if (c.getCourseID().equals(course.getCourseID())) {
+                System.out.println("Error: Course with ID " + course.getCourseID() + " already exists.");
+                return;
+            }
+        }
         courseList.add(course);
     }
 
+
     public void displayAll() {
-        System.out.println(courseList);
+        if (courseList.isEmpty()) {
+            System.out.println("No courses found.");
+        } else {
+            for (Course c : courseList) {
+                System.out.println(c);
+            }
+        }
     }
+
 
     public void updateCourse(Course course) {
         for (int i = 0; i < courseList.size(); i++) {
