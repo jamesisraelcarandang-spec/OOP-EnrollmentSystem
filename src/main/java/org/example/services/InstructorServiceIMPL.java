@@ -10,10 +10,16 @@ public class InstructorServiceIMPL implements InstructorService{
 
     @Override
     public void addInstructor(Instructor instructor) {
-
+        for (Instructor i : instructorList) {
+            if (i.getPersonID().equals(instructor.getPersonID())) {
+                System.out.println("Error: Instructor with ID " + instructor.getPersonID() + " already exists.");
+                return;
+            }
+        }
         instructorList.add(instructor);
         System.out.println("Instructor " + instructor.getName() + " added to the system.");
     }
+
 
     @Override
     public void assignInstructorToSection(Instructor instructor, Section section) {

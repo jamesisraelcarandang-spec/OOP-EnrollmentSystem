@@ -1,7 +1,5 @@
 package org.example.model;
 
-import java.util.Scanner;
-
 public class Student extends Person {
     private String program;
 

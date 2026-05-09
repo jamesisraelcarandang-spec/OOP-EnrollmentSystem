@@ -14,8 +14,13 @@ public class TuitionFeePayment implements TuitionFeePaymentService{
         return totalTuition;
     }
     public void makePayment(double amount) {
+        if (amount > balance) {
+            System.out.println("Error: Payment of " + amount + " exceeds remaining balance of " + balance);
+            return;
+        }
         balance = balance - amount;
     }
+
     public double getRemainingBalance() {
         return balance;
     }
