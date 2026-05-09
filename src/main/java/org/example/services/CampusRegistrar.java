@@ -3,14 +3,14 @@ package org.example.services;
 import org.example.model.*;
 
 public class CampusRegistrar {
-    private StudentRegistrationIMPL StudReg;
-    private CourseRegistrationIMPL courseReg;
-    private InstructorServiceIMPL instReg;
-    private EnrollmentServiceIMPL enrollReg;
+    private StudentRegistration StudReg;
+    private CourseRegistration courseReg;
+    private InstructorService instReg;
+    private EnrollmentService enrollReg;
     private TuitionFeePaymentService tuitionReg;
 
-    public CampusRegistrar(StudentRegistrationIMPL registration, CourseRegistrationIMPL courseReg,
-                           InstructorServiceIMPL instReg, EnrollmentServiceIMPL enrollReg,
+    public CampusRegistrar(StudentRegistration registration, CourseRegistration courseReg,
+                           InstructorService instReg, EnrollmentService enrollReg,
                            TuitionFeePaymentService tuitionReg) {
     this.StudReg = registration;
     this.courseReg =courseReg;
