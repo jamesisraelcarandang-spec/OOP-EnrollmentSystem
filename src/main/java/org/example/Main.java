@@ -261,7 +261,7 @@ public class Main {
                     } else if (tOpt == 3) {
                         System.out.println("Remaining Balance: " + registrar.getBalance());
                     }
-
+                        break;
                 case 7:
                     System.out.print("Student ID: "); String eid = scan.nextLine();
                     System.out.print("Student Name: "); String ename = scan.nextLine();

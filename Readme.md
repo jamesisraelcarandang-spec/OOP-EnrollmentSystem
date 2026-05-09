@@ -50,3 +50,32 @@
 ![Screenshot 2026-05-08 at 11.33.53 PM.png](src/main/resources/Images/Screenshot%202026-05-08%20at%2011.33.53%E2%80%AFPM.png)
 ![Screenshot 2026-05-08 at 11.33.59 PM.png](src/main/resources/Images/Screenshot%202026-05-08%20at%2011.33.59%E2%80%AFPM.png)
 ![Screenshot 2026-05-08 at 11.34.05 PM.png](src/main/resources/Images/Screenshot%202026-05-08%20at%2011.34.05%E2%80%AFPM.png)
+
+# Added Features
+
+---
+**Author** Carandang James Israel N.
+
+**Added Features and Fixes**
+
+- Fixed tuition discount formula to work with whole numbers (e.g. 10 for 10%)
+- Fixed payment logic so it subtracts from balance correctly
+- Added overpayment protection so balance can't go negative
+- Added Department and Section management through the menu
+- Students can now be enrolled into any section, not just a hardcoded one
+- Added duplicate ID prevention for Students, Courses, and Instructors
+- Added try-catch input validation so the program won't crash on bad input
+- Added 6 JUnit tests for tuition calculation and payment
+- Fixed string comparison bugs (using .equals instead of ==)
+- Cleaned up display formatting for student and course lists
+
+![Screenshot 2026-05-09 at 7.51.27 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%207.51.27%E2%80%AFPM.png)
+![Screenshot 2026-05-09 at 8.20.00 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%208.20.00%E2%80%AFPM.png)
+![Screenshot 2026-05-09 at 8.20.13 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%208.20.13%E2%80%AFPM.png)
+![Screenshot 2026-05-09 at 8.20.25 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%208.20.25%E2%80%AFPM.png)
+![Screenshot 2026-05-09 at 8.20.35 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%208.20.35%E2%80%AFPM.png)
+![Screenshot 2026-05-09 at 8.20.51 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%208.20.51%E2%80%AFPM.png)
+![Screenshot 2026-05-09 at 8.20.59 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%208.20.59%E2%80%AFPM.png)
+![Screenshot 2026-05-09 at 8.22.25 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%208.22.25%E2%80%AFPM.png)
+![Screenshot 2026-05-09 at 8.22.50 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%208.22.50%E2%80%AFPM.png)
+![Screenshot 2026-05-09 at 8.23.27 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%208.23.27%E2%80%AFPM.png)
