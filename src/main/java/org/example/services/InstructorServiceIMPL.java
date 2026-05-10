@@ -1,37 +1,34 @@
 package org.example.services;
 
+import org.example.exceptions.DuplicateIdException;
 import org.example.model.Instructor;
 import org.example.model.Section;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InstructorServiceIMPL implements InstructorService{
-    private List<Instructor>instructorList= new ArrayList<>();
+public class InstructorServiceIMPL implements InstructorService {
+    private List<Instructor> instructorList = new ArrayList<>();
 
     @Override
-    public void addInstructor(Instructor instructor) {
+    public void addInstructor(Instructor instructor) throws DuplicateIdException {
         for (Instructor i : instructorList) {
             if (i.getPersonID().equals(instructor.getPersonID())) {
-                System.out.println("Error: Instructor with ID " + instructor.getPersonID() + " already exists.");
-                return;
+                throw new DuplicateIdException("Instructor with ID " + instructor.getPersonID() + " already exists.");
             }
         }
         instructorList.add(instructor);
         System.out.println("Instructor " + instructor.getName() + " added to the system.");
     }
 
-
     @Override
     public void assignInstructorToSection(Instructor instructor, Section section) {
-
         section.setInstructor(instructor);
         System.out.println("Instructor " + instructor.getName() + " is now teaching at Section : " + section.getSectionName());
     }
 
     @Override
     public void getInstructorDetails(String instructorID) {
-
-        for(Instructor i : instructorList) {
+        for (Instructor i : instructorList) {
             if (i.getPersonID().equals(instructorID)) {
                 System.out.println("Instructor Details");
                 System.out.println("Name: " + i.getName());
@@ -44,23 +41,23 @@ public class InstructorServiceIMPL implements InstructorService{
 
     @Override
     public void updateInstructor(Instructor instructor) {
-    for (int i = 0; i < instructorList.size(); i++) {
-        if (instructorList.get(i).getPersonID().equals(instructor.getPersonID())) {
-            instructorList.set(i,instructor);
-            System.out.println("Instructor Updated Successfully.");
-          }
-       }
+        for (int i = 0; i < instructorList.size(); i++) {
+            if (instructorList.get(i).getPersonID().equals(instructor.getPersonID())) {
+                instructorList.set(i, instructor);
+                System.out.println("Instructor Updated Successfully.");
+            }
+        }
     }
 
     @Override
     public void removeInstructor(String instructorID) {
-    for (Instructor i : instructorList) {
-        if (i.getPersonID().equals(instructorID)) {
-            instructorList.remove(i);
-            System.out.println("Instructor Removed");
-            return;
+        for (Instructor i : instructorList) {
+            if (i.getPersonID().equals(instructorID)) {
+                instructorList.remove(i);
+                System.out.println("Instructor Removed");
+                return;
+            }
         }
-    }
         System.out.println("Instructor not found");
     }
 
@@ -68,10 +65,15 @@ public class InstructorServiceIMPL implements InstructorService{
     public void getAllInstructors() {
         if (instructorList.isEmpty()) {
             System.out.println("No instructors found.");
-        }else{
+        } else {
             for (Instructor i : instructorList) {
                 System.out.println(i);
             }
         }
+    }
+
+    @Override
+    public int getInstructorCount() {
+        return instructorList.size();
     }
 }

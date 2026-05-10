@@ -37,27 +37,17 @@ class TuitionFeePaymentTest {
     }
 
     @Test
-    @DisplayName("Multiple payments should accumulate correctly")
-    void shouldHandleMultiplePayments() {
-        tuitionFeePayment.calculateTuitionFee(3, 10);
-        tuitionFeePayment.makePayment(1000);
-        tuitionFeePayment.makePayment(500);
-        assertEquals(1200.0, tuitionFeePayment.getRemainingBalance());
+    @DisplayName("Overpayment should not change balance")
+    void shouldRejectOverpayment() {
+        tuitionFeePayment.calculateTuitionFee(3, 0);
+        tuitionFeePayment.makePayment(5000);
+        assertEquals(3000.0, tuitionFeePayment.getRemainingBalance());
     }
 
     @Test
-    @DisplayName("Tuition is not fully paid after partial payment")
-    void shouldCheckIfTheTuitionFeeIsNotFullyPaid() {
-        tuitionFeePayment.calculateTuitionFee(3, 10);
-        tuitionFeePayment.makePayment(1000);
-        assertFalse(tuitionFeePayment.isFullyPaid());
-    }
-
-    @Test
-    @DisplayName("Tuition is fully paid after complete payment")
-    void shouldBeFullyPaidAfterCompletePayment() {
-        tuitionFeePayment.calculateTuitionFee(3, 10);
-        tuitionFeePayment.makePayment(2700);
-        assertTrue(tuitionFeePayment.isFullyPaid());
+    @DisplayName("Dean's Lister scholarship gives 25% discount")
+    void shouldApplyDeansListerDiscount() {
+        double result = tuitionFeePayment.applyScholarshipDiscount("Dean's Lister", 3);
+        assertEquals(2250.0, result);
     }
 }

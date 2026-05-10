@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.model.*;
 import org.example.services.*;
+import org.example.exceptions.*;
 import java.util.Scanner;
 
 public class Main {
@@ -41,7 +42,11 @@ public class Main {
         System.out.print("Enter Instructor Name: "); String instName = scan.nextLine();
         System.out.print("Enter Instructor Department: "); String instDept = scan.nextLine();
         Instructor instructor = new Instructor(instId, instName, instDept);
-        registrar.addInstructor(instructor);
+        try {
+            registrar.addInstructor(instructor);
+        } catch (DuplicateIdException e) {
+            System.out.println("Error during setup: " + e.getMessage());
+        }
         section.setInstructor(instructor);
 
         System.out.println("\nSetup Complete! Starting system...");
@@ -92,8 +97,11 @@ public class Main {
                         System.out.print("Student ID: "); String sid = scan.nextLine();
                         System.out.print("Name: "); String sname = scan.nextLine();
                         System.out.print("Program: "); String sprog = scan.nextLine();
-                        registrar.saveStudent(new Student(sprog, sid, sname));
-                        System.out.println("Student registered.");
+                        try {
+                            registrar.saveStudent(new Student(sprog, sid, sname));
+                        } catch (DuplicateIdException e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
 
                     } else if (sOpt == 2) {
                         registrar.displayAllStudent();
@@ -103,7 +111,6 @@ public class Main {
                         System.out.print("New Name: "); String uname = scan.nextLine();
                         System.out.print("New Program: "); String uprog = scan.nextLine();
                         registrar.update(new Student(uprog, uid, uname));
-                        System.out.println("Student updated.");
 
                     } else if (sOpt == 4) {
                         System.out.print("Student ID to remove: "); String rid = scan.nextLine();
@@ -133,8 +140,11 @@ public class Main {
                         System.out.print("Course ID: "); String cid = scan.nextLine();
                         System.out.print("Course Name: "); String cn = scan.nextLine();
                         System.out.print("Program: "); String cp = scan.nextLine();
-                        registrar.save(new Course(cid, cn, cp));
-                        System.out.println("Course added.");
+                        try {
+                            registrar.save(new Course(cid, cn, cp));
+                        } catch (DuplicateIdException e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
 
                     } else if (cOpt == 2) {
                         registrar.displayAll();
@@ -144,7 +154,6 @@ public class Main {
                         System.out.print("New Course Name: "); String ucn = scan.nextLine();
                         System.out.print("Program: "); String ucp = scan.nextLine();
                         registrar.updateCourse(new Course(ucid, ucn, ucp));
-                        System.out.println("Course updated.");
 
                     } else if (cOpt == 4) {
                         System.out.print("Course ID to remove: "); String rcid = scan.nextLine();
@@ -174,7 +183,11 @@ public class Main {
                         System.out.print("Instructor ID: "); String iid = scan.nextLine();
                         System.out.print("Name: "); String iname = scan.nextLine();
                         System.out.print("Department: "); String idept = scan.nextLine();
-                        registrar.addInstructor(new Instructor(iid, iname, idept));
+                        try {
+                            registrar.addInstructor(new Instructor(iid, iname, idept));
+                        } catch (DuplicateIdException e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
                     } else if (iOpt == 2) {
                         registrar.getAllInstructor();
                     } else if (iOpt == 3) {
@@ -214,7 +227,7 @@ public class Main {
                     break;
 
                 case 5:
-                    System.out.print("Department ID: "); String hierDeptId = scan.nextLine();  // CHANGED: user picks which dept
+                    System.out.print("Department ID: "); String hierDeptId = scan.nextLine();
                     Department hierDept = registrar.findDepartment(hierDeptId);
                     if (hierDept != null) {
                         registrar.showHierarchy(hierDept);
@@ -224,8 +237,9 @@ public class Main {
                 case 6:
                     System.out.println("\n--- Tuition Management ---");
                     System.out.println("1. Calculate Tuition Fee");
-                    System.out.println("2. Make Payment");
-                    System.out.println("3. View Remaining Balance");
+                    System.out.println("2. Calculate with Scholarship");
+                    System.out.println("3. Make Payment");
+                    System.out.println("4. View Remaining Balance");
                     System.out.print("Choice: ");
                     int tOpt;
                     try {
@@ -235,7 +249,6 @@ public class Main {
                         scan.nextLine();
                         break;
                     }
-
 
                     if (tOpt == 1) {
                         try {
@@ -250,6 +263,28 @@ public class Main {
                         }
                     } else if (tOpt == 2) {
                         try {
+                            System.out.print("Number of units: "); int units = scan.nextInt();
+                            scan.nextLine();
+                            System.out.println("Scholarship Types:");
+                            System.out.println("1. Dean's Lister (25% off)");
+                            System.out.println("2. Academic Scholar (50% off)");
+                            System.out.println("3. Presidential Scholar (100% off)");
+                            System.out.print("Select scholarship: "); int schOpt = scan.nextInt();
+                            scan.nextLine();
+                            String schType;
+                            if (schOpt == 1) schType = "Dean's Lister";
+                            else if (schOpt == 2) schType = "Academic Scholar";
+                            else if (schOpt == 3) schType = "Presidential Scholar";
+                            else { System.out.println("Invalid scholarship."); break; }
+                            double fee = tuitionService.applyScholarshipDiscount(schType, units);
+                            System.out.println("Scholarship: " + schType);
+                            System.out.println("Total Tuition Fee: " + fee);
+                        } catch (java.util.InputMismatchException e) {
+                            System.out.println("Invalid input. Please enter a valid number.");
+                            scan.nextLine();
+                        }
+                    } else if (tOpt == 3) {
+                        try {
                             System.out.print("Amount to pay: "); double pay = scan.nextDouble();
                             scan.nextLine();
                             registrar.payTuition(pay);
@@ -258,10 +293,11 @@ public class Main {
                             System.out.println("Invalid input. Please enter a valid number.");
                             scan.nextLine();
                         }
-                    } else if (tOpt == 3) {
+                    } else if (tOpt == 4) {
                         System.out.println("Remaining Balance: " + registrar.getBalance());
                     }
-                        break;
+                    break;
+
                 case 7:
                     System.out.print("Student ID: "); String eid = scan.nextLine();
                     System.out.print("Student Name: "); String ename = scan.nextLine();
@@ -278,7 +314,11 @@ public class Main {
                             }
                         }
                         if (targetSection != null) {
-                            registrar.enroll(new Student(eprog, eid, ename), targetSection);
+                            try {
+                                registrar.enroll(new Student(eprog, eid, ename), targetSection);
+                            } catch (SectionFullException e) {
+                                System.out.println("Error: " + e.getMessage());
+                            }
                         } else {
                             System.out.println("Error: Section ID " + enrollSecId + " not found.");
                         }
