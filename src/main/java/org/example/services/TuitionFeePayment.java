@@ -13,6 +13,26 @@ public class TuitionFeePayment implements TuitionFeePaymentService{
         balance = totalTuition;
         return totalTuition;
     }
+
+    public double applyScholarshipDiscount(String scholarshipType, int units) {
+        double discount;
+        switch (scholarshipType) {
+            case "Dean's Lister":
+                discount = 25;
+                break;
+            case "Academic Scholar":
+                discount = 50;
+                break;
+            case "Presidential Scholar":
+                discount = 100;
+                break;
+            default:
+                discount = 0;
+                break;
+        }
+        return calculateTuitionFee(units, discount);
+    }
+
     public void makePayment(double amount) {
         if (amount > balance) {
             System.out.println("Error: Payment of " + amount + " exceeds remaining balance of " + balance);

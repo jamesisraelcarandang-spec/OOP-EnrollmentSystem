@@ -1,9 +1,10 @@
 package org.example.services;
 
+import org.example.exceptions.DuplicateIdException;
 import org.example.model.Course;
 
 public interface CourseRegistration {
-    void save (Course course);
+    void save(Course course) throws DuplicateIdException;
     void displayAll();
     void updateCourse(Course course);
     String removeCourse(Course course);

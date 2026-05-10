@@ -79,3 +79,24 @@
 ![Screenshot 2026-05-09 at 8.22.25 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%208.22.25%E2%80%AFPM.png)
 ![Screenshot 2026-05-09 at 8.22.50 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%208.22.50%E2%80%AFPM.png)
 ![Screenshot 2026-05-09 at 8.23.27 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%208.23.27%E2%80%AFPM.png)
+
+# New Features
+
+---
+**Author** Carandang James Israel N
+
+**Added Features**
+- Some changes in Student/Course/Instructor 
+- Department & Section Management
+- Tuition Calculation with Scholarship Discounts
+- Enrollment with Capacity Checking
+- Input Validation & Duplicate Prevention
+- Added more JUnit Test
+- Added the custom exception
+![Screenshot 2026-05-09 at 9.56.28 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%209.56.28%E2%80%AFPM.png)
+![Screenshot 2026-05-09 at 9.56.55 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%209.56.55%E2%80%AFPM.png)
+![Screenshot 2026-05-09 at 11.47.14 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%2011.47.14%E2%80%AFPM.png)
+![Screenshot 2026-05-09 at 11.47.33 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%2011.47.33%E2%80%AFPM.png)
+![Screenshot 2026-05-09 at 11.47.45 PM.png](src/main/resources/Images/Screenshot%202026-05-09%20at%2011.47.45%E2%80%AFPM.png)
+![Screenshot 2026-05-10 at 4.57.06 PM.png](src/main/resources/Images/Screenshot%202026-05-10%20at%204.57.06%E2%80%AFPM.png)
+![Screenshot 2026-05-10 at 4.57.13 PM.png](src/main/resources/Images/Screenshot%202026-05-10%20at%204.57.13%E2%80%AFPM.png)

@@ -1,6 +1,7 @@
 package org.example.services;
 
 import org.example.model.*;
+import org.example.exceptions.*;
 
 public class CampusRegistrar {
     private StudentRegistration StudReg;
@@ -21,7 +22,7 @@ public class CampusRegistrar {
         this.deptReg = deptReg;
     }
 
-    public void save(Course course) {
+    public void save(Course course) throws DuplicateIdException {
         courseReg.save(course);
     }
 
@@ -37,7 +38,7 @@ public class CampusRegistrar {
         return courseReg.removeCourse(course);
     }
 
-    public void saveStudent(Student student) {
+    public void saveStudent(Student student) throws DuplicateIdException {
         StudReg.saveStudent(student);
     }
 
@@ -53,7 +54,7 @@ public class CampusRegistrar {
         return StudReg.removeStudent(student);
     }
 
-    public void addInstructor(Instructor instructor) {
+    public void addInstructor(Instructor instructor) throws DuplicateIdException {
         instReg.addInstructor(instructor);
     }
 
@@ -73,7 +74,7 @@ public class CampusRegistrar {
         instReg.removeInstructor(Id);
     }
 
-    public void enroll(Student student, Section section) {
+    public void enroll(Student student, Section section) throws SectionFullException {
         enrollReg.enrollStudentInSection(student, section);
     }
 

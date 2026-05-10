@@ -1,20 +1,25 @@
 package org.example.services;
+
+import org.example.exceptions.DuplicateIdException;
 import org.example.model.Student;
 import java.util.List;
 import java.util.ArrayList;
+
 public class StudentRegistrationIMPL implements StudentRegistration {
     private List<Student> studentList = new ArrayList<>();
 
-    public void saveStudent(Student student) {
+    @Override
+    public void saveStudent(Student student) throws DuplicateIdException {
         for (Student s : studentList) {
             if (s.getPersonID().equals(student.getPersonID())) {
-                System.out.println("Error: Student with ID " + student.getPersonID() + " already exists.");
-                return;
+                throw new DuplicateIdException("Student with ID " + student.getPersonID() + " already exists.");
             }
         }
         studentList.add(student);
+        System.out.println("Student " + student.getName() + " registered successfully.");
     }
 
+    @Override
     public void displayAllStudent() {
         if (studentList.isEmpty()) {
             System.out.println("No students found.");
@@ -25,22 +30,25 @@ public class StudentRegistrationIMPL implements StudentRegistration {
         }
     }
 
+    @Override
     public void update(Student student) {
-        for (int i = 0; i <studentList.size(); i++) {
-            if(studentList.get(i).getPersonID().equals(student.getPersonID())) {
+        for (int i = 0; i < studentList.size(); i++) {
+            if (studentList.get(i).getPersonID().equals(student.getPersonID())) {
                 studentList.set(i, student);
-                break;
+                System.out.println("Student updated successfully.");
+                return;
             }
         }
     }
+
+    @Override
     public String removeStudent(Student student) {
         for (int i = 0; i < studentList.size(); i++) {
-            if(studentList.get(i).getPersonID().equals(student.getPersonID())) {
+            if (studentList.get(i).getPersonID().equals(student.getPersonID())) {
                 studentList.remove(i);
-
                 return "Successfully Deleted";
             }
         }
-        return "Error";
+        return "Error: Student not found";
     }
 }

@@ -1,51 +1,54 @@
 package org.example.services;
+
+import org.example.exceptions.DuplicateIdException;
 import org.example.model.Course;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-public class CourseRegistrationIMPL implements CourseRegistration{
-    private List<Course> courseList = new ArrayList<>();
+public class CourseRegistrationIMPL implements CourseRegistration {
+    private List<Course> courses = new ArrayList<>();
 
-    public void save(Course course) {
-        for (Course c : courseList) {
+    @Override
+    public void save(Course course) throws DuplicateIdException {
+        for (Course c : courses) {
             if (c.getCourseID().equals(course.getCourseID())) {
-                System.out.println("Error: Course with ID " + course.getCourseID() + " already exists.");
-                return;
+                throw new DuplicateIdException("Course with ID " + course.getCourseID() + " already exists.");
             }
         }
-        courseList.add(course);
+        courses.add(course);
+        System.out.println("Course added successfully.");
     }
 
-
+    @Override
     public void displayAll() {
-        if (courseList.isEmpty()) {
+        if (courses.isEmpty()) {
             System.out.println("No courses found.");
         } else {
-            for (Course c : courseList) {
+            for (Course c : courses) {
                 System.out.println(c);
             }
         }
     }
 
-
+    @Override
     public void updateCourse(Course course) {
-        for (int i = 0; i < courseList.size(); i++) {
-            if (courseList.get(i).getCourseID().equals(course.getCourseID())) {
-                courseList.set(i, course);
-                break;
+        for (int i = 0; i < courses.size(); i++) {
+            if (courses.get(i).getCourseID().equals(course.getCourseID())) {
+                courses.set(i, course);
+                System.out.println("Course updated successfully.");
+                return;
             }
         }
     }
 
+    @Override
     public String removeCourse(Course course) {
-        for (int i = 0; i < courseList.size(); i++) {
-            if (courseList.get(i).getCourseID().equals(course.getCourseID())) {
-                courseList.remove(i);
-
+        for (int i = 0; i < courses.size(); i++) {
+            if (courses.get(i).getCourseID().equals(course.getCourseID())) {
+                courses.remove(i);
                 return "Successfully Deleted";
             }
         }
-        return "Error";
+        return "Error: Course not found";
     }
 }
-
